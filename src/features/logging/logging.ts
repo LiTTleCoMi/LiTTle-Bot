@@ -72,8 +72,8 @@ export class Logging {
 		const channelName = "name" in message.channel ? message.channel.name : "Unknown Channel";
 		let color: ColorResolvable | null = null;
 		let title = "";
-    let titleUrl: string | null = null;
-    let UserId = message.author ? message.author.id : "Unknown";
+		let titleUrl: string | null = null;
+		let UserId = message.author ? message.author.id : "Unknown";
 
 		if (messageEvent === MessageEvent.Delete) {
 			color = "#ED4245";
@@ -121,7 +121,7 @@ export class Logging {
 		}
 
 		description += "Message ID: " + message.id + "\n";
-		description += "User ID: " + UserId;
+		const footerText = "ID: " + UserId;
 
 		const embed = new EmbedBuilder()
 			.setColor(color)
@@ -132,6 +132,9 @@ export class Logging {
 			.setTitle(title)
 			.setURL(titleUrl)
 			.setDescription(description)
+			.setFooter({
+				text: footerText,
+			})
 			.setTimestamp();
 
 		this.channel.send({ embeds: [embed] });
