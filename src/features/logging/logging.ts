@@ -100,9 +100,8 @@ export class Logging {
 		if (messageEvent === MessageEvent.Edit && oldMessage) {
 			if (oldMessage.content !== message.content) {
 				description += "**Before: **" + oldMessage.content + "\n";
-				description += "**+After: **" + message.content + "\n";
+				description += "**+After: **" + message.content + "\n\n";
 			}
-			description += "\n";
 			if (oldAttachmentUrls.length !== attachmentUrls.length) {
 				const oldSet = new Set(oldAttachmentUrls);
 				const newSet = new Set(attachmentUrls);
@@ -114,7 +113,9 @@ export class Logging {
 					newSet.difference(oldSet).forEach((url) => (description += url + "\n"));
 				}
 				description += "\n";
-			}
+      }
+      
+      if (!description) return; // indicating embed change, dont care about that
 		} else if (message.content) {
 			description = "**Content:\n**" + message.content + "\n\n";
 			if (attachmentUrls.length) description += "**Attachments:\n**" + attachmentUrls.join("\n") + "\n\n";
