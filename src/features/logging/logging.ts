@@ -46,7 +46,7 @@ export class Logging {
 
 		const firstMessage = messages.first()!;
 		const channelName = "name" in firstMessage.channel ? firstMessage.channel.name : "Unknown Channel";
-    
+
 		const transcriptLines = messages.map((msg) => {
 			const author = msg.author?.username || "Unknown User";
 			const content = msg.content || "[No text content/Only attachments]";
@@ -73,7 +73,8 @@ export class Logging {
 		let color: ColorResolvable | null = null;
 		let title = "";
     let titleUrl: string | null = null;
-    
+    let UserId = message.author ? message.author.id : "Unknown";
+
 		if (messageEvent === MessageEvent.Delete) {
 			color = "#ED4245";
 			title = "Message deleted in #";
@@ -119,7 +120,8 @@ export class Logging {
 			if (attachmentUrls.length) description += "**Attachments:\n**" + attachmentUrls.join("\n") + "\n\n";
 		}
 
-		description += "Message ID: " + message.id;
+		description += "Message ID: " + message.id + "\n";
+		description += "User ID: " + UserId;
 
 		const embed = new EmbedBuilder()
 			.setColor(color)
