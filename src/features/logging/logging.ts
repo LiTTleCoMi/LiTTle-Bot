@@ -77,7 +77,7 @@ export class Logging {
 
 		if (messageEvent === MessageEvent.Delete) {
 			color = "#ED4245";
-			title = "Message deleted in #";
+      title = "Message deleted in #";
 		} else if (messageEvent === MessageEvent.Edit) {
 			color = "#425eed";
 			title = "Message edited in #";
@@ -91,7 +91,7 @@ export class Logging {
 		title += channelName;
 
 		let attachmentUrls: string[] = [];
-		message.attachments.forEach((attachment) => attachmentUrls.push(attachment.url));
+    message.attachments.forEach((attachment) => attachmentUrls.push(attachment.url));
 
 		let oldAttachmentUrls: string[] = [];
 		oldMessage?.attachments.forEach((attachment) => oldAttachmentUrls.push(attachment.url));
@@ -116,8 +116,8 @@ export class Logging {
       }
       
       if (!description) return; // indicating embed change, dont care about that
-		} else if (message.content) {
-			description = "**Content:\n**" + message.content + "\n\n";
+    } else {
+      if (message.content) description = "**Content:\n**" + message.content + "\n\n";
 			if (attachmentUrls.length) description += "**Attachments:\n**" + attachmentUrls.join("\n") + "\n\n";
 		}
 
